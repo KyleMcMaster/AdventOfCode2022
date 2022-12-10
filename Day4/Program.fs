@@ -1,4 +1,4 @@
-module Program = 
+module Program
     let [<EntryPoint>] main args = 
 
         let getFullyContainsCount (elves: string[][]) = 
@@ -30,7 +30,7 @@ module Program =
             count
         
         // read file and print all lines
-        let lines = System.IO.File.ReadAllLines("input.txt")
+        let lines: string[] = System.IO.File.ReadAllLines("input.txt")
         
         // split each line by comma and store as tuple of strings
         let elves = lines |> Array.map (fun line -> line.Split(','))
