@@ -23,7 +23,6 @@ module Monkeys = // They're bananas!
                   match (x % 23) with
                   | 0 -> 2
                   | _ -> 3)
-
           createMonkey
               1
               [ 54; 65; 75; 74 ]
@@ -32,7 +31,6 @@ module Monkeys = // They're bananas!
                   match (x % 19) with
                   | 0 -> 2
                   | _ -> 0)
-
           createMonkey
               2
               [ 79; 60; 97 ]
@@ -41,7 +39,6 @@ module Monkeys = // They're bananas!
                   match (x % 13) with
                   | 0 -> 1
                   | _ -> 3)
-
           createMonkey
               3
               [ 74 ]
@@ -122,15 +119,6 @@ module Monkeys = // They're bananas!
 module Part1 =
     open Monkeys
 
-    // round per monkey
-    // has any items; no return
-    // capture number of items
-    // if any; for each item
-    // operation
-    // divide by 3
-    // set items to keep and throw
-    // set new inspection count
-
     let inspectAndDivideByThree (worryLevel: int) operation =
         printfn "Monkey is inspecting item with worry level %i" worryLevel
         let newWorryLevel = worryLevel |> operation
@@ -157,14 +145,12 @@ module Part1 =
 
                 let updatedReceiver =
                     { receiver with startingItems = receiver.startingItems @ [ worryLevel ] }
-
                 newMonkeys.[receiverIndex] <- updatedReceiver
 
             let updatedSender =
                 { sender with
                     totalInspections = newInspectionCount
                     startingItems = [] }
-
             newMonkeys.[senderId] <- updatedSender
 
         newMonkeys
@@ -183,14 +169,12 @@ module Part1 =
 
     let solve (monkeys: Monkey array) =
         let mutable finalMonkeys = monkeys
-
         let iterations = seq { 1..20 }
 
         for i in iterations do
             printfn "Round %A" i
             finalMonkeys <- processRound finalMonkeys
         //printMonkeyInspections finalMonkeys
-
         //printMonkeyItems finalMonkeys
 
         let twoMostActiveMonkeys =
@@ -198,15 +182,12 @@ module Part1 =
             |> Array.toList
             |> List.sortByDescending (fun monkey -> monkey.totalInspections)
             |> List.take 2
-
         printfn "The two most active monkeys are %A and %A" twoMostActiveMonkeys.[0].id twoMostActiveMonkeys.[1].id
 
         let levelOfMonkeyBusiness =
             twoMostActiveMonkeys
             |> (fun monkeys -> monkeys.[0].totalInspections * monkeys.[1].totalInspections)
-
         printfn "The level of monkey business is %d" levelOfMonkeyBusiness
-
 
 module Part2 =
     let solve lines = 0
@@ -216,11 +197,6 @@ module Program =
 
     [<EntryPoint>]
     let main args =
-
-        // let totalRounds = 20
-
-        // let lines = System.IO.File.ReadAllLines("input.txt")
-
         //Part1.solve sampleMonkeys
         Part1.solve inputMonkeys
 
